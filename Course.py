@@ -1,5 +1,4 @@
 class Course:
-
     def __init__(self, ccode, cname):
         self.ccode = ccode
         self.cname = cname
