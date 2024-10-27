@@ -1,5 +1,4 @@
-import Course
-
+from Course import *
 
 class LabCourse(Course):
     def __init__(self, ccode, cname):
