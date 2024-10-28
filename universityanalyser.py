@@ -5,6 +5,7 @@ import sys
 
 EXIT = 7
 
+
 def LoadCourses():
     courses = {}
 
@@ -99,3 +100,4 @@ if __name__ == "__main__":
 
         else:
             print("!!!! PLEASE ENTER A VALID OPTION !!!!")
+

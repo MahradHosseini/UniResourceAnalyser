@@ -1,5 +1,6 @@
 from Course import Course
 
+
 class LabCourse(Course):
     def __init__(self, ccode, cname):
         super().__init__(ccode, cname)
@@ -25,15 +26,3 @@ class LabCourse(Course):
                 f"Labs: \n{labs_str}\n"
                 f"Total Lab Capacity: {self.getLabCapacity()}\n")
 
-if __name__=="__main__":
-    course = LabCourse(22,"CNG 445")
-    # Add lab sections with lab number, capacity, number of registered students, and instructor name
-    course.addLabSection("Lab1", 30, 25, "Dr. Smith")
-    course.addLabSection("Lab2", 25, 20, "Dr. Johnson")
-    course.addLabSection("Lab3", 35, 30, "Dr. Williams")
-
-    # Test getLabCapacity method
-    print("Total Lab Capacity:", course.getLabCapacity())  # Expected output: 90
-
-    # Test __str__ method
-    print(course)
