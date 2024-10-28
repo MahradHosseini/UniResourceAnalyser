@@ -24,6 +24,7 @@ class Department:
         totalCapacity = 0
         for course in self.getLabCourses():
             totalCapacity+=course.getTotalCapacity()
+        return totalCapacity
 
     def getUnpopulatedCourses(self):
         return [course for course in self.courses if course.getTotalCapacity() < 5]

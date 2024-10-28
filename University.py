@@ -2,6 +2,7 @@ from Department import Department
 from Course import Course
 from LabCourse import LabCourse
 import re
+import matplotlib as plt
 
 
 class University:
