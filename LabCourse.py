@@ -1,4 +1,5 @@
-from Course import *
+from Course import Course
+
 
 class LabCourse(Course):
     def __init__(self, ccode, cname):
@@ -24,3 +25,4 @@ class LabCourse(Course):
                 f"Total Section Registered: {self.getTotalRegistered()}\n"
                 f"Labs: \n{labs_str}\n"
                 f"Total Lab Capacity: {self.getLabCapacity()}\n")
+
