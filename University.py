@@ -1,8 +1,7 @@
 from Department import Department
 from Course import Course
-import re
-
 from LabCourse import LabCourse
+import re
 
 
 class University:
@@ -60,12 +59,35 @@ class University:
                     else:
                         department.addLabCourse(courseArray[1],courseArray[2])
                         existing_course = department.courses[-1]
-                #checking if the course code matches the pattern
+                # checking if the course code matches the pattern
                 if re.match(r"S\d+", courseArray[4]):  # If section starts with "S", it's a regular section
                     existing_course.addSection(courseArray[4], courseArray[5], courseArray[6], courseArray[3])
 
                 else:  # Otherwise, it's a lab section
                     existing_course.addLabSection(courseArray[4], courseArray[5], courseArray[6], courseArray[3])
+
+    def PrintLabCourses(self):
+        for department in self.departments:
+            print(f"Department: {department.dname}, Total Lab Capacity: {department.getTotalLabCapacity()}")
+            labCourses = department.getLabCourses()
+            for course in labCourses:
+                print(course)
+
+    def PrintDepartmentSizes(self):
+        pass
+
+    def PrintInstructorCourses(self):
+        pass
+
+    def PrintUnpopulatedCourses(self):
+        pass
+
+    def PrintMultiSectionCourses(self):
+        pass
+
+    def PrintTopCourses(self):
+        pass
+
 
 if __name__ == "__main__":
     university = University("METU","NCC")
