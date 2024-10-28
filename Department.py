@@ -9,12 +9,11 @@ class Department:
         self.decode = dcode
         self.courses = []
 
-    def addCourse(self,ccode,cname):
-        course = Course(ccode,cname)
-        self.courses.append(course)
-    #new function
-    def addLabCourse(self,ccode,cname):
-        course = LabCourse(ccode,cname)
+    def addCourse(self,ccode,cname,isLabCourse):
+        if isLabCourse :
+            course = LabCourse(ccode, cname)
+        else:
+            course = Course(ccode,cname)
         self.courses.append(course)
 
     def getLabCourses(self):

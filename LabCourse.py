@@ -6,7 +6,7 @@ class LabCourse(Course):
         self.labSections = {}
 
     def addLabSection(self, labNo, capacity, registeredStudents, instructor):
-        self.labSections[labNo] = (instructor, int(capacity), int(registeredStudents))
+        self.labSections[labNo] = (instructor, capacity, registeredStudents)
 
     def getLabCapacity(self):
         total = 0

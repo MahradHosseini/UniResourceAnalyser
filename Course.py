@@ -5,7 +5,7 @@ class Course:
         self.sections = {}
 
     def addSection(self, sectionNo, capacity, registeredStudents, instructor):
-        self.sections[sectionNo] = (instructor, int(capacity), int(registeredStudents))
+        self.sections[sectionNo] = (instructor, capacity, registeredStudents)
 
     def getTotalCapacity(self):
         total = 0
