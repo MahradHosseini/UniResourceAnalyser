@@ -26,26 +26,34 @@ class Department:
         return totalCapacity
 
     def getUnpopulatedCourses(self):
-        return [course for course in self.courses if course.getTotalCapacity() < 5]
+        return [course for course in self.courses if course.getTotalRegistered() < 5]
 
     def getMultipleSectionCourses(self):
-        # get lab courses that have lab sections
-        lab_courses = [lab_course for lab_course in self.getLabCourses() if bool(lab_course.labSections)]
-        # get regular courses that have sections
-        regular_courses = [course for course in self.courses if bool(course.sections)]
-        # combine both lists and return it as one list
-        return lab_courses + regular_courses
+        multiSectionCourses = []
+        for course in self.courses:
+            numOfSections = len(course.sections.items())
+            numOfLabs = 0
+            if isinstance(course, LabCourse):
+                numOfLabs = len(course.labSections.items())
+
+            if numOfSections > 1 or numOfLabs > 1:
+                multiSectionCourses.append(course)
+
+        return multiSectionCourses
 
     def getTopCourses(self):
-        courseWithCapacity = []
-        # combining the course and the capacity in 2d array
+        maxRegistered = 0
+        topCoursesList = []
+
         for course in self.courses:
-            courseWithCapacity.append([course, course.getTotalCapacity()])
-        # sorting the 2d array according to capacity
-        sorted_courses = sorted(courseWithCapacity, key=lambda x: x[1], reverse=True)
-        # printing the courses in descending order
-        for course, capacity in sorted_courses:
-            print(course)
+            totalRegistered = course.getTotalRegistered()
+            if totalRegistered > maxRegistered:
+                maxRegistered = totalRegistered
+                topCoursesList = [course]  # Starting a new list
+            elif totalRegistered == maxRegistered:
+                topCoursesList.append(course)
+
+        return topCoursesList
 
     def __str__(self):
         return "Department name: " + self.dname + " Department code: " + str(self.dcode)

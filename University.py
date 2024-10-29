@@ -18,7 +18,7 @@ class University:
             exit(1)
         file_departments = file.readlines()[1:]  # Skip the first line
         for i in range(len(file_departments)):
-            # separating department name,shortnamen and code
+            # separating department name,shortname and code
             splited_departments = re.split(",", file_departments[i].strip())
             self.addDepartment(splited_departments[2], splited_departments[1], splited_departments[0])
 
@@ -115,46 +115,30 @@ class University:
 
     def printUnpopulatedCourses(self):
         for department in self.departments:
-            found = 0
             print("\nDepartment: " + department.dname)
-            for course in department.courses:
-                if course.getTotalRegistered() < 5:
-                    print(course)
-                    found = 1
-            if found == 0:
+            unpopulatedCourses = department.getUnpopulatedCourses()
+            for course in unpopulatedCourses:
+                print(course)
+            if not unpopulatedCourses:
                 print("No unpopulated courses in this department")
 
     def printMultiSectionCourses(self):
 
         for department in self.departments:
-            found = 0
             print("\nDepartment: " + department.dname)
-            for course in department.courses:
-                numOfSections = len(course.sections.items())
-                numOfLabs = 0
-                if isinstance(course, LabCourse):
-                    numOfLabs = len(course.labSections.items())
+            multiSectionCourses = department.getMultipleSectionCourses()
 
-                if numOfSections > 1 or numOfLabs > 1:
-                    print(course)
-                    found = 1
+            for course in multiSectionCourses:
+                print(course)
 
-            if found == 0:
+            if not multiSectionCourses:
                 print("No multi-section course in this department")
 
     def printTopCourses(self):
         for department in self.departments:
-            maxRegistered = 0
-            topCoursesList = []
-
-            for course in department.courses:
-                totalRegistered = course.getTotalRegistered()
-                if totalRegistered > maxRegistered:
-                    maxRegistered = totalRegistered
-                    topCoursesList = [course] # Starting a new list
-                elif totalRegistered == maxRegistered:
-                    topCoursesList.append(course)
-
             print(f"\nDepartment: {department.dname}")
+
+            topCoursesList = department.getTopCourses()
+
             for course in topCoursesList:
                 print(course)
