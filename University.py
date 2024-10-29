@@ -69,18 +69,28 @@ class University:
     def printLabCourses(self):
         for department in self.departments:
             print(f"Department {department.dname}, Total Lab Capacity: {department.getTotalLabCapacity()}")
+
+            # Printing the lab courses of the department
             for course in department.getLabCourses():
                 print(course)
 
     def printDepartmentSizes(self):
-        totalCapacityList = []
-        depShortNameList = []
+        totalCapacityList = [] # To store total capacity of each department
+        depShortNameList = [] # To store short name of the departments
+
         for department in self.departments:
             totalCapacity = 0
+
+            # Counting the capacity of the department
             for course in department.courses:
                 totalCapacity += course.getTotalCapacity()
+
+            # Appending the capacity, and the short name of each department to relevant lists
+            # while maintaining the matching order
             totalCapacityList.append(totalCapacity)
             depShortNameList.append(department.dshortname)
+
+        # Plotting the Pie Chart
         plt.pie(totalCapacityList, labels=depShortNameList)
         plt.title('Department Sizes')
         plt.show()
@@ -116,9 +126,15 @@ class University:
     def printUnpopulatedCourses(self):
         for department in self.departments:
             print("\nDepartment: " + department.dname)
+
+            # Get unpopulated courses of the department
             unpopulatedCourses = department.getUnpopulatedCourses()
+
+            # Print the courses
             for course in unpopulatedCourses:
                 print(course)
+
+            # If the list is empty, show relevant message
             if not unpopulatedCourses:
                 print("No unpopulated courses in this department")
 
@@ -126,11 +142,15 @@ class University:
 
         for department in self.departments:
             print("\nDepartment: " + department.dname)
+
+            # Get multi-section courses of the department
             multiSectionCourses = department.getMultipleSectionCourses()
 
+            # Print the courses
             for course in multiSectionCourses:
                 print(course)
 
+            # If the list is empty, show relevant message
             if not multiSectionCourses:
                 print("No multi-section course in this department")
 
@@ -138,7 +158,9 @@ class University:
         for department in self.departments:
             print(f"\nDepartment: {department.dname}")
 
+            # Get the top courses of the department
             topCoursesList = department.getTopCourses()
 
+            # Print them
             for course in topCoursesList:
                 print(course)

@@ -3,7 +3,7 @@ from LabCourse import *
 from University import University
 import sys
 
-EXIT = 7
+EXIT = 7 # The exit option in the menu
 
 if __name__ == "__main__":
 
@@ -20,6 +20,7 @@ if __name__ == "__main__":
     METU.loadUniversity(departmentsFile, coursesFile)
     print("University successfully loaded.")
 
+    # Initiating the Menu loop
     menu = 0
     while menu != EXIT:
         print("\n1. Print all the lab courses")
@@ -30,12 +31,14 @@ if __name__ == "__main__":
         print("6. Print top course(s)")
         print(f"{EXIT}. Exit")
 
+        # Getting the input while checking for the Value Error (will raise if the input is not an integer)
         try:
             menu = int(input("Enter your choice: "))
         except ValueError:
             print("!!!! PLEASE ENTER A VALID NUMBER !!!!")
             continue
 
+        # Implementing a switch-like behaviour for the menu
         if menu == 1:
             METU.printLabCourses()
         elif menu == 2:
@@ -50,7 +53,6 @@ if __name__ == "__main__":
             METU.printTopCourses()
         elif menu == EXIT:
             print("Goodbye!")
-
         else:
             print("!!!! PLEASE ENTER A VALID OPTION !!!!")
 
