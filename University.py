@@ -11,6 +11,7 @@ class University:
         self.departments = []
 
     def loadUniversity(self, departmentsFilename, coursesFilename):
+        #Loading the departments
         try:
             file = open(departmentsFilename, "r")
         except IOError:
@@ -22,6 +23,7 @@ class University:
             splited_departments = re.split(",", file_departments[i].strip())
             self.addDepartment(splited_departments[2], splited_departments[1], splited_departments[0])
 
+        #Loading the courses
         try:
             file = open(coursesFilename, "r")
         except IOError:
@@ -35,6 +37,8 @@ class University:
             if re.match(r"^\w{3,4}\s\d{3,4}$", splited_courses[1]):
                 # creating a new course object
                 self.addCourseToDepartment(splited_courses)
+
+        file.close()
 
     def addDepartment(self, dname, dshortname, dcode):
         # creating a new department object
@@ -75,23 +79,23 @@ class University:
                 print(course)
 
     def printDepartmentSizes(self):
-        totalCapacityList = [] # To store total capacity of each department
+        totalRegisteredList = [] # To store total registered of each department
         depShortNameList = [] # To store short name of the departments
 
         for department in self.departments:
-            totalCapacity = 0
+            totalRegistered = 0
 
-            # Counting the capacity of the department
+            # Counting the total registered of the department
             for course in department.courses:
-                totalCapacity += course.getTotalCapacity()
+                totalRegistered += course.getTotalRegistered()
 
-            # Appending the capacity, and the short name of each department to relevant lists
+            # Appending the registered, and the short name of each department to relevant lists
             # while maintaining the matching order
-            totalCapacityList.append(totalCapacity)
+            totalRegisteredList.append(totalRegistered)
             depShortNameList.append(department.dshortname)
 
         # Plotting the Pie Chart
-        plt.pie(totalCapacityList, labels=depShortNameList)
+        plt.pie(totalRegisteredList, labels=depShortNameList)
         plt.title('Department Sizes')
         plt.show()
 
@@ -107,7 +111,7 @@ class University:
         if len(foundCourses) == 0:
             print("Given instructors name doesn't exist in the system")
             return
-        if len(foundCourses) == 1:
+        elif len(foundCourses) == 1:
             print(foundCourses[0])
         else:
             print("This instructor teaches more than 1 course,"
